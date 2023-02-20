@@ -11,7 +11,7 @@ class SET(QWizardPage):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, *SCREEN_SIZE)
+        self.setGeometry(0, 0, *SCREEN_SIZE)
         self.setWindowTitle('НАСТРОЙКИ')
         self.normal = QLabel('НОРМАЛЬНЫЕ УСЛОВИЯ ДЛЯ ДАТЧИКОВ', self)
         self.normal.resize(700, 40)

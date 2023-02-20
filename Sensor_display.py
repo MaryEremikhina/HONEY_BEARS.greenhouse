@@ -1,0 +1,170 @@
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+
+SCREEN_SIZE = [800, 480]
+
+class SET(QWizardPage):
+    def __init__(self):
+        super(SET, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, *SCREEN_SIZE)
+        self.setWindowTitle('НАСТРОЙКИ')
+        self.normal = QLabel('НОРМАЛЬНЫЕ УСЛОВИЯ ДЛЯ ДАТЧИКОВ', self)
+        self.normal.resize(700, 40)
+        self.normal.move(20, 20)
+        self.n_temperature = QLabel('ТЕМПЕРАТУРА', self)
+        self.n_temperature.move(40, 60)
+        self.n_s_humidity = QLabel('ВЛАЖНОСТЬ ПОЧВЫ', self)
+        self.n_s_humidity.move(40, 100)
+        self.n_a_humidity = QLabel('ВЛАЖНОСТЬ ВОЗДУХА', self)
+        self.n_a_humidity.move(40, 160)
+        self.con = QLabel('УСЛОВИЯ ДЛЯ ЗАПУСКА МЕХАНИЗМА', self)
+        self.con.resize(700, 40)
+        self.con.move(20, 220)
+        self.con_temperature = QLabel('ОТКЛОНЕНИЕ ТЕМПЕРАТУРЫ', self)
+        self.con_temperature.move(40, 260)
+        self.con_a_humidity = QLabel('ОТКЛОНЕНИЕ ВЛАЖНОСТИ ВОЗДУХА', self)
+        self.con_a_humidity.move(40, 320)
+        self.con_s_humidity = QLabel('ОТКЛОНЕНИЕ ВЛАЖНОСТИ ПОЧВЫ', self)
+        self.con_s_humidity.move(40, 370)
+        self.con_w = QLabel('НИЖНЯЯ ГРАНИЦА ОБЪЁМА ВОДЫ В БАКЕ', self)
+        self.con_w.move(40, 410)
+        self.conw = QCheckBox('АВТОМАТИЗАЦИЯ')
+        self.conw.move(20, 460)
+        self.t = QLineEdit(self)
+        self.t.move(700, 60)
+        self.sh = QLineEdit(self)
+        self.sh.move(700, 120)
+        self.ah = QLineEdit(self)
+        self.ah.move(700, 180)
+        self.ct = QLineEdit(self)
+        self.ct.move(700, 280)
+        self.cah = QLineEdit(self)
+        self.cah.move(700, 340)
+        self.csh = QLineEdit(self)
+        self.csh.move(700, 390)
+        self.cw = QLineEdit(self)
+        self.cw.move(700, 430)
+        self.btn = QPushButton('', self)
+        self.btn.move(750, 465)
+        self.btn.clicked.connect(Example())
+        self.h = QPixmap('home.jpg')
+        self.home = QLabel(self)
+        self.home.setPixmap(self.h)
+
+
+class MAS(QWizardPage):
+    def __init__(self):
+        super(MAS, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, *SCREEN_SIZE)
+        self.setWindowTitle('ПОДРОБНЕЕ О ДАТЧИКАХ')
+        self.t1 = QLabel('Датчик температуры 1         :  <h1 style="color: rgb(253, 208, 23);>32°C', self)
+        self.t2 = QLabel('Датчик температуры 2         :  <h1 style="color: rgb(119, 221, 119);">26°C', self)
+        self.ah1 = QLabel('Датчик влажности воздуха 1  :  <h1 style="color: rgb(253, 208, 23);>60%', self)
+        self.ah2 = QLabel('Датчик влажности воздуха 2  :  <h1 style="color: rgb(255, 0, 0);">30%', self)
+        self.sh1 = QLabel('Датчик влажности почвы 1    :  <h1 style="color: rgb(119, 221, 119);">71%', self)
+        self.sh2 = QLabel('Датчи влажности почвы 2     :  <h1 style="color: rgb(255, 0, 0);">49%', self)
+        self.t1.setFont(QFont('Times', 12, QFont.Bold))
+        self.t2.setFont(QFont('Times', 12, QFont.Bold))
+        self.ah1.setFont(QFont('Times', 12, QFont.Bold))
+        self.ah2.setFont(QFont('Times', 12, QFont.Bold))
+        self.sh1.setFont(QFont('Times', 12, QFont.Bold))
+        self.sh2.setFont(QFont('Times', 12, QFont.Bold))
+        self.h = QPixmap('home.jpg')
+        self.home = QLabel(self)
+        self.home.setPixmap(self.h)
+        self.t1.move(20, 60)
+        self.t2.move(20, 100)
+        self.ah1.move(20, 140)
+        self.ah2.move(20, 180)
+        self.sh1.move(20, 220)
+        self.sh2.move(20, 260)
+        self.btn = QPushButton('', self)
+        self.btn.move(750, 465)
+        self.btn.clicked.connect(Example())
+
+
+class Example(QWizard):
+    def __init__(self):
+        super(Example, self).__init__()
+        self.initUI()
+
+        self.secondPage = SET()
+        self.thirdPage = MAS()
+        self.fourthPage = CAS()
+
+    def initUI(self):
+        self.setGeometry(300, 300, *SCREEN_SIZE)
+        self.setWindowTitle('ГЛАВНЫЙ ЭКРАН')
+        window_leaf = QLabel('Форточка', self)
+        window_leaf.move(20, 20)
+        watering = Qlabel('Полив', self)
+        watering.move(20, 100)
+        humidifier = QLabel('Увлажнитель воздуха', self)
+        humidifier.move(20, 200)
+        self.btn_wl = QPushButton('0° •', self)
+        self.btn_wl.move(20, 65)
+        self.btn_w = QPushButton('o | |', self)
+        self.btn_w.move(20, 145)
+        self.btn_h = QPushButton('o | |', self)
+        self.btn_h.move(20, 245)
+        self.btn_more_sens = QPushButton('Подробнее о датчиках', self)
+        self.btn_more_sens.resize(50, 325)
+        self.btn_more_sens.move(250, 410)
+        self.a_humidity = QLabel('ВЛАЖНОСТЬ:     <h1 style="color: rgb(255, 0, 0);">45%', self)
+        self.a_humidity.resize(50, 300)
+        self.a_humidity.move(265, 130)
+        self.s_humidity = QLabel('ВЛАЖНОСТЬ ПОЧВЫ:     <h1 style="color: rgb(253, 208, 23);>60%', self)
+        self.s_humidity.resize(50, 300)
+        self.s_humidity.move(265, 200)
+        self.temperature = QLabel('ТЕМПЕРАТУРА:     <h1 style="color: rgb(119, 221, 119);">29°C', self)
+        self.temperature.resize(50, 300)
+        self.temperature.move(265, 40)
+        self.temperature.setFont(QFont('Times', 12, QFont.Bold))
+        self.a_humidity.setFont(QFont('Times', 12, QFont.Bold))
+        self.s_humidity.setFont(QFont('Times', 12, QFont.Bold))
+        self.btn_settings = QPushButton('', self)
+        self.btn_condition = QPushButton('', self)
+        self.btn_settings.move(785, 430)
+        self.btn_condition.move(785, 20)
+        self.s = QPixmap('настройки_шесеренка.jpg')
+        self.settings = QLabel(self)
+        self.settings.setPixmap(self.s)
+        self.e = QPixmap('земля.jpg')
+        self.earth = QLabel(self)
+        self.earth.setPixmap(self.e)
+        self.c = QPixmap('восклицательный_знак.jpg')
+        self.condition = QLabel(self)
+        self.condition.setPixmap(self.c)
+        self.btn_more_sens.clicked.connect(MAS())
+        self.btn_settings.clicked.connect(SET())
+        self.btn_condition.clicked.connect(CAS())
+
+    def paintvent(self, event):
+        qp = QPainter()
+        qp.begin(self)
+        self.draw_drop(qp)
+        qp.end()
+
+    def draw_drop(self, qp):
+        qp.setBrush(QColor(192, 192, 192))
+        qp.drawRect(700, 100, 70, 240)
+        self.d = QPixmap('капля.jpg')
+        self.drop = QLabel(self)
+        self.drop.setPixmap(self.d)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    ex.show()
+    sys.exit(app.exec())
+
+
